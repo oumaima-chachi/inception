@@ -9,4 +9,7 @@ up:
 down:
 	docker compose -f srcs/docker-compose.yml down
 
-.PHONY: all up down
+clean:
+	docker compose -f srcs/docker-compose.yml down -v
+
+.PHONY: all up down clean
