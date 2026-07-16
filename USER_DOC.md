@@ -15,3 +15,23 @@ Three services work together to serve a WordPress website:
 
 Only `nginx` is reachable from outside the virtual machine; `wordpress` and
 `mariadb` stay private on the internal Docker network.
+
+## 2. Starting and stopping the project
+
+From the root of the repository, on the virtual machine:
+
+```bash
+make        # first start: builds the images then starts everything
+```
+
+```bash
+make up     # restart without rebuilding the images
+```
+
+```bash
+make down   # stop everything (your data is kept)
+```
+
+```bash
+make clean  # stop everything AND delete all data (irreversible)
+```
