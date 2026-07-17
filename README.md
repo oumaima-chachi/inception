@@ -59,3 +59,22 @@ setup guide.
 - [WP-CLI documentation](https://wp-cli.org/)
 - [MariaDB documentation](https://mariadb.com/kb/en/documentation/)
 - 42 Inception subject (v5.3)
+
+### AI usage
+
+An AI assistant (Claude, Anthropic) was used during this project for the
+following tasks only:
+
+- Reviewing the finished configuration files against the subject's
+  requirements and pointing out non-compliant points (e.g. TLS restriction
+  missing, admin username violating the naming rule, volumes not bound to
+  `/home/login/data`, secrets not being used).
+- Generating documentation drafts (this README, `USER_DOC.md`,
+  `DEV_DOC.md`) that were then reviewed and adapted.
+- Explaining Docker/Linux concepts (PID 1, FastCGI, TLS, named volumes vs
+  bind mounts) to make sure they were fully understood before being used in
+  the project, in line with the school's AI usage guidelines.
+
+No AI tool was used to blindly generate the Dockerfiles or shell scripts
+without review — every generated line was read, understood, and tested
+before being kept.
