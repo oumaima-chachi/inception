@@ -4,6 +4,8 @@ services:
     container_name: mariadb
     build:
       context: ./requirements/mariadb
+    image: mariadb
+    pull_policy: never
 
 networks:
   inception:
