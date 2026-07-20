@@ -12,6 +12,11 @@ services:
     networks:
       - inception
 
+  wordpress:
+    container_name: wordpress
+    build:
+      context: ./requirements/wordpress
+
 networks:
   inception:
     driver: bridge
