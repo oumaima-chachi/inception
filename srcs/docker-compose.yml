@@ -18,6 +18,9 @@ services:
       context: ./requirements/wordpress
     image: wordpress
     pull_policy: never
+    restart: always
+    networks:
+      - inception
 
 networks:
   inception:
