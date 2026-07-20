@@ -7,6 +7,10 @@ services:
     image: mariadb
     pull_policy: never
     restart: always
+    env_file:
+      - .env
+    networks:
+      - inception
 
 networks:
   inception:
