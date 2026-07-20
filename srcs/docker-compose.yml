@@ -6,6 +6,7 @@ services:
       context: ./requirements/mariadb
     image: mariadb
     pull_policy: never
+    restart: always
 
 networks:
   inception:
