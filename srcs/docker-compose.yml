@@ -19,6 +19,8 @@ services:
     image: wordpress
     pull_policy: never
     restart: always
+    depends_on:
+      - mariadb
     networks:
       - inception
 
