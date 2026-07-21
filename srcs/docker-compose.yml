@@ -33,6 +33,8 @@ services:
     image: nginx
     pull_policy: never
     restart: always
+    env_file:
+      - .env
     depends_on:
       - wordpress
     ports:
