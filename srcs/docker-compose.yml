@@ -51,6 +51,11 @@ volumes:
       device: ${HOME}/data/mariadb
 
   wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/data/wordpress
 
 networks:
   inception:
