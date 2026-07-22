@@ -25,6 +25,8 @@ services:
       - .env
     depends_on:
       - mariadb
+    volumes:
+      - wordpress:/var/www/html
     networks:
       - inception
 
