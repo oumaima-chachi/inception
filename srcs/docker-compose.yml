@@ -42,6 +42,10 @@ services:
     networks:
       - inception
 
+volumes:
+  mariadb:
+  wordpress:
+
 networks:
   inception:
     driver: bridge
