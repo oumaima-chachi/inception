@@ -44,6 +44,12 @@ services:
 
 volumes:
   mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/data/mariadb
+
   wordpress:
 
 networks:
