@@ -26,6 +26,9 @@ services:
     restart: always
     env_file:
       - .env
+    secrets:
+      - db_password
+      - credentials
     depends_on:
       - mariadb
     volumes:
