@@ -78,3 +78,23 @@ following tasks only:
 No AI tool was used to blindly generate the Dockerfiles or shell scripts
 without review — every generated line was read, understood, and tested
 before being kept.
+
+## Project description
+
+### Docker usage and project sources
+
+Each service (`nginx`, `wordpress`, `mariadb`) has its own Dockerfile under
+`srcs/requirements/<service>/`, built from `debian:bookworm`. No image is
+pulled from Docker Hub except this base image. Configuration files live in
+each service's `conf/` folder and are copied into the image at build time;
+the domain-dependent NGINX configuration is instead generated at container
+startup (see `srcs/requirements/nginx/tools/setup.sh`) so it always matches
+`DOMAIN_NAME`.
+
+### Secrets vs Environment Variables
+
+Environment variables (stored in `srcs/.env` here) are simple key/value
+pairs injected into a container; they are visible in clear text through
+`docker inspect` or `docker exec env`. Docker secrets are files mounted
+read-only at `/run/secrets/<name>` inside a container; their content is not
+exposed through `docker inspect`.
