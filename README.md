@@ -91,10 +91,37 @@ the domain-dependent NGINX configuration is instead generated at container
 startup (see `srcs/requirements/nginx/tools/setup.sh`) so it always matches
 `DOMAIN_NAME`.
 
+### Virtual Machines vs Docker
+
+A virtual machine virtualizes an entire computer, including its own kernel,
+through a hypervisor: it is heavy (several GB), slow to boot (minutes), but
+very strongly isolated from the host. A Docker container only virtualizes a
+process: it shares the host's kernel and is isolated through Linux
+namespaces and cgroups, making it lightweight (tens of MB) and fast to start
+(milliseconds), at the cost of slightly weaker isolation. This project uses
+Docker because it needs several independent, reproducible services running
+side by side without the overhead of one full OS per service.
+
 ### Secrets vs Environment Variables
 
 Environment variables (stored in `srcs/.env` here) are simple key/value
 pairs injected into a container; they are visible in clear text through
 `docker inspect` or `docker exec env`. Docker secrets are files mounted
 read-only at `/run/secrets/<name>` inside a container; their content is not
-exposed through `docker inspect`.
+exposed through `docker inspect`. In this project, non-sensitive
+configuration (domain name, database name, usernames, emails) stays in
+`.env`, while every password (`db_password.txt`, `db_root_password.txt`,
+`credentials.txt`) is stored under `secrets/` and read by the startup
+scripts from `/run/secrets/`, never hard-coded or passed as plain
+environment variables.
+
+### Docker Network vs Host Network
+
+With `network: host`, a container shares the host machine's network stack
+directly: no isolation, and every container fighting over the same ports.
+This project instead defines a dedicated bridge network (`inception`) in
+`docker-compose.yml`: containers on this network get their own private IP
+range and can reach each other by service name (`mariadb`, `wordpress`,
+`nginx`) through Docker's internal DNS, while staying isolated from the
+host's network except for the single port NGINX explicitly publishes (443).
+
