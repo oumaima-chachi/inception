@@ -91,17 +91,6 @@ the domain-dependent NGINX configuration is instead generated at container
 startup (see `srcs/requirements/nginx/tools/setup.sh`) so it always matches
 `DOMAIN_NAME`.
 
-### Virtual Machines vs Docker
-
-A virtual machine virtualizes an entire computer, including its own kernel,
-through a hypervisor: it is heavy (several GB), slow to boot (minutes), but
-very strongly isolated from the host. A Docker container only virtualizes a
-process: it shares the host's kernel and is isolated through Linux
-namespaces and cgroups, making it lightweight (tens of MB) and fast to start
-(milliseconds), at the cost of slightly weaker isolation. This project uses
-Docker because it needs several independent, reproducible services running
-side by side without the overhead of one full OS per service.
-
 ### Secrets vs Environment Variables
 
 Environment variables (stored in `srcs/.env` here) are simple key/value
@@ -125,3 +114,14 @@ range and can reach each other by service name (`mariadb`, `wordpress`,
 `nginx`) through Docker's internal DNS, while staying isolated from the
 host's network except for the single port NGINX explicitly publishes (443).
 
+### Docker Volumes vs Bind Mounts
+
+A bind mount maps a host path directly into a container; the path must be
+managed manually and is not portable. A named volume is managed by Docker
+itself, and can still be redirected to a specific host path through
+`driver_opts`. The subject requires named volumes (not bind mounts) whose
+data physically lives in `/home/<login>/data`: this is achieved here with
+`driver: local` + `driver_opts.device: ${HOME}/data/<volume>` in
+`docker-compose.yml`, combined with `mkdir -p` in the Makefile to make sure
+the target directories exist before the first `docker compose up`.
+# inception
