@@ -35,3 +35,17 @@ make down   # stop everything (your data is kept)
 ```bash
 make clean  # stop everything AND delete all data (irreversible)
 ```
+
+Wait a few seconds after `make`/`make up` before opening the site: MariaDB
+and WordPress need a short time to initialize on the very first start.
+
+## 4. Where to find the credentials
+
+- Non-sensitive settings (domain, database name, usernames, emails) are in
+  `srcs/.env`.
+- All passwords are stored in the `secrets/` folder, one file per secret:
+  - `secrets/db_password.txt` — MariaDB application user password
+  - `secrets/db_root_password.txt` — MariaDB root password
+  - `secrets/credentials.txt` — WordPress admin & user passwords
+    (`WP_ADMIN_PASSWORD=...` / `WP_USER_PASSWORD=...`)
+
