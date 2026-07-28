@@ -6,4 +6,6 @@ MYSQL_ROOT_PASSWORD=$(cat /run/secrets/db_root_password)
 
 if [ ! -d "/var/lib/mysql/${MYSQL_DATABASE}" ]; then
     echo "Initializing MariaDB..."
+
+    mariadb-install-db --user=mysql --datadir=/var/lib/mysql
 fi
