@@ -8,4 +8,7 @@ if [ ! -d "/var/lib/mysql/${MYSQL_DATABASE}" ]; then
     echo "Initializing MariaDB..."
 
     mariadb-install-db --user=mysql --datadir=/var/lib/mysql
+
+    mysqld_safe &
+    pid="$!"
 fi
