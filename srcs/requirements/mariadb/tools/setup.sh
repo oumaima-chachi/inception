@@ -18,5 +18,7 @@ if [ ! -d "/var/lib/mysql/${MYSQL_DATABASE}" ]; then
 
     mysql <<EOF
 ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
+
+CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};
 EOF
 fi
