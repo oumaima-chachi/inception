@@ -15,4 +15,8 @@ if [ ! -d "/var/lib/mysql/${MYSQL_DATABASE}" ]; then
     until mysqladmin ping --silent; do
         sleep 1
     done
+
+    mysql <<EOF
+ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
+EOF
 fi
