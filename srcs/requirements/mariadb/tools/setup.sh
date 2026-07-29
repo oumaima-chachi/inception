@@ -11,4 +11,8 @@ if [ ! -d "/var/lib/mysql/${MYSQL_DATABASE}" ]; then
 
     mysqld_safe &
     pid="$!"
+
+    until mysqladmin ping --silent; do
+        sleep 1
+    done
 fi
