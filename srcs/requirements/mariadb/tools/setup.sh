@@ -32,3 +32,5 @@ EOF
 
     wait "$pid"
 fi
+
+exec mysqld_safe
