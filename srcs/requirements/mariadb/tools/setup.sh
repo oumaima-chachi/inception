@@ -29,4 +29,6 @@ FLUSH PRIVILEGES;
 EOF
 
     mysqladmin -uroot -p"${MYSQL_ROOT_PASSWORD}" shutdown
+
+    wait "$pid"
 fi
