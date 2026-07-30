@@ -27,4 +27,6 @@ GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';
 
 FLUSH PRIVILEGES;
 EOF
+
+    mysqladmin -uroot -p"${MYSQL_ROOT_PASSWORD}" shutdown
 fi
