@@ -8,4 +8,6 @@ RUN apt-get update && \
 
 COPY ./conf/my.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
+COPY ./tools/setup.sh /setup.sh
+
 EXPOSE 3306
