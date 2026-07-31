@@ -33,4 +33,6 @@ EOF
     wait "$pid"
 fi
 
+echo "Starting MariaDB..."
+
 exec mysqld_safe
