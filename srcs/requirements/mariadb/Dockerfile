@@ -1,6 +1,10 @@
 FROM debian:bookworm
 
-RUN apt-get update && apt-get install -y --no-install-recommends mariadb-server && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        mariadb-server && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 COPY ./conf/my.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
