@@ -39,6 +39,25 @@ make clean  # stop everything AND delete all data (irreversible)
 Wait a few seconds after `make`/`make up` before opening the site: MariaDB
 and WordPress need a short time to initialize on the very first start.
 
+## 3. Accessing the website and the admin panel
+
+Make sure your machine's `/etc/hosts` contains a line pointing your domain
+to your local machine, for example:
+
+```
+127.0.0.1 ochachi.42.fr
+```
+
+Then, in a browser:
+
+- **Website:** `https://ochachi.42.fr`
+- **Admin panel:** `https://ochachi.42.fr/wp-admin`
+
+The certificate is self-signed (generated locally, not issued by a public
+certificate authority), so your browser will show a security warning the
+first time — this is expected. Click "Advanced" → "Proceed" (wording
+depends on your browser) to continue.
+
 ## 4. Where to find the credentials
 
 - Non-sensitive settings (domain, database name, usernames, emails) are in
@@ -48,4 +67,18 @@ and WordPress need a short time to initialize on the very first start.
   - `secrets/db_root_password.txt` — MariaDB root password
   - `secrets/credentials.txt` — WordPress admin & user passwords
     (`WP_ADMIN_PASSWORD=...` / `WP_USER_PASSWORD=...`)
+
+The WordPress admin username is defined by `WP_ADMIN_USER` in `.env`
+(never a value containing "admin"/"administrator", per the school's
+requirements). The associated password is in `secrets/credentials.txt`.
+
+**Change the default passwords shipped in this repository before any real
+use** — they are placeholders meant to be replaced.
+
+The WordPress admin username is defined by `WP_ADMIN_USER` in `.env`
+(never a value containing "admin"/"administrator", per the school's
+requirements). The associated password is in `secrets/credentials.txt`.
+
+**Change the default passwords shipped in this repository before any real
+use** — they are placeholders meant to be replaced.
 
