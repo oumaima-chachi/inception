@@ -12,5 +12,6 @@ done
 cd /var/www/html
 
 if [ ! -f wp-config.php ]; then
-    echo "Installing WordPress..."
+
+    wp core download --allow-root
 fi
