@@ -10,3 +10,7 @@ while ! mysqladmin ping -h mariadb -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" --sil
 done
 
 cd /var/www/html
+
+if [ ! -f wp-config.php ]; then
+    echo "Installing WordPress..."
+fi
