@@ -14,4 +14,11 @@ cd /var/www/html
 if [ ! -f wp-config.php ]; then
 
     wp core download --allow-root
+
+    wp config create \
+        --dbname="${MYSQL_DATABASE}" \
+        --dbuser="${MYSQL_USER}" \
+        --dbpass="${MYSQL_PASSWORD}" \
+        --dbhost=mariadb:3306 \
+        --allow-root
 fi
