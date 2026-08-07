@@ -37,3 +37,5 @@ if [ ! -f wp-config.php ]; then
         --allow-root
 
 fi
+
+exec /usr/sbin/php-fpm8.2 -F
