@@ -16,4 +16,6 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 
 COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 
+COPY ./tools/setup.sh /setup.sh
+
 EXPOSE 9000
