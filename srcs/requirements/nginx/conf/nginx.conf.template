@@ -6,4 +6,7 @@ server
 
     # Le sujet impose TLSv1.2 ou TLSv1.3 uniquement.
     ssl_protocols TLSv1.2 TLSv1.3;
+
+    ssl_certificate /etc/nginx/ssl/inception.crt;
+    ssl_certificate_key /etc/nginx/ssl/inception.key;
 }
