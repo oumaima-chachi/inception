@@ -9,4 +9,8 @@ server
 
     ssl_certificate /etc/nginx/ssl/inception.crt;
     ssl_certificate_key /etc/nginx/ssl/inception.key;
+
+    root /var/www/html;
+
+    index index.php index.html;
 }
