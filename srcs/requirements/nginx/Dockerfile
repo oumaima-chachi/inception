@@ -9,3 +9,5 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 COPY ./conf/nginx.conf.template /etc/nginx/conf.d/default.conf.template
+
+EXPOSE 443
