@@ -7,3 +7,5 @@ RUN apt-get update && \
         gettext-base && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+COPY ./conf/nginx.conf.template /etc/nginx/conf.d/default.conf.template
