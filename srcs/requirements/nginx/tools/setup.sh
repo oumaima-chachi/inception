@@ -10,3 +10,5 @@ if [ ! -f /etc/nginx/ssl/inception.crt ]; then
         -out /etc/nginx/ssl/inception.crt \
         -subj "/C=MA/ST=Casablanca/L=Casablanca/O=42/OU=42/CN=${DOMAIN_NAME}"
 fi
+
+envsubst '${DOMAIN_NAME}' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf
