@@ -58,6 +58,25 @@ certificate authority), so your browser will show a security warning the
 first time — this is expected. Click "Advanced" → "Proceed" (wording
 depends on your browser) to continue.
 
+## 3. Accessing the website and the admin panel
+
+Make sure your machine's `/etc/hosts` contains a line pointing your domain
+to your local machine, for example:
+
+```
+127.0.0.1 ochachi.42.fr
+```
+
+Then, in a browser:
+
+- **Website:** `https://ochachi.42.fr`
+- **Admin panel:** `https://ochachi.42.fr/wp-admin`
+
+The certificate is self-signed (generated locally, not issued by a public
+certificate authority), so your browser will show a security warning the
+first time — this is expected. Click "Advanced" → "Proceed" (wording
+depends on your browser) to continue.
+
 ## 4. Where to find the credentials
 
 - Non-sensitive settings (domain, database name, usernames, emails) are in
@@ -75,10 +94,23 @@ requirements). The associated password is in `secrets/credentials.txt`.
 **Change the default passwords shipped in this repository before any real
 use** — they are placeholders meant to be replaced.
 
-The WordPress admin username is defined by `WP_ADMIN_USER` in `.env`
-(never a value containing "admin"/"administrator", per the school's
-requirements). The associated password is in `secrets/credentials.txt`.
+## 5. Checking that everything runs correctly
 
-**Change the default passwords shipped in this repository before any real
-use** — they are placeholders meant to be replaced.
+List the running containers and confirm all three are `Up`:
 
+```bash
+docker compose -f srcs/docker-compose.yml ps
+```
+
+Watch the logs of a specific service if something looks wrong:
+
+```bash
+docker compose -f srcs/docker-compose.yml logs -f nginx
+docker compose -f srcs/docker-compose.yml logs -f wordpress
+docker compose -f srcs/docker-compose.yml logs -f mariadb
+```
+
+A healthy stack shows all three containers as `Up` and the website loads
+at `https://<your-domain>` without a "502 Bad Gateway" or connection
+refused error. A 502 usually means WordPress/PHP-FPM isn't ready yet — wait
+a few seconds and refresh.
