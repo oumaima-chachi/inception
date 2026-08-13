@@ -79,28 +79,7 @@ scratch:
 make re
 ```
 
-## 3. Managing containers and volumes
+## 4. Where data is stored and how it persists
 
-Useful `docker compose` commands (run from the repo root):
-
-```bash
-docker compose -f srcs/docker-compose.yml ps                 # container status
-docker compose -f srcs/docker-compose.yml logs -f <service>  # follow logs
-docker compose -f srcs/docker-compose.yml exec <service> sh  # shell into a container
-docker compose -f srcs/docker-compose.yml restart <service>  # restart one service
-```
-
-Volume inspection:
-
-```bash
-docker volume ls                       # list all volumes
-docker volume inspect srcs_mariadb     # see where a volume is bound on disk
-```
-
-To wipe everything (containers + volumes, i.e. all data) and rebuild from
-scratch:
-
-```bash
-make re
-```
+Per the subject's requirements, both named volumes are bound to real host folders.
 
