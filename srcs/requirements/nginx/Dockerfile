@@ -10,4 +10,9 @@ RUN apt-get update && \
 
 COPY ./conf/nginx.conf.template /etc/nginx/conf.d/default.conf.template
 
+COPY ./tools/setup.sh /setup.sh
+RUN chmod +x /setup.sh
+
 EXPOSE 443
+
+CMD ["/setup.sh"]
