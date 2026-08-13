@@ -81,5 +81,30 @@ make re
 
 ## 4. Where data is stored and how it persists
 
-Per the subject's requirements, both named volumes are bound to real host folders.
+Per the subject's requirements, both named volumes are bound (via
+`driver_opts` in `docker-compose.yml`) to real folders on the host instead
+of Docker's internal storage area:
+
+| Volume | Host path | Contains |
+|---|---|---|
+| `mariadb` | `$HOME/data/mariadb` | The MariaDB database files (`/var/lib/mysql` inside the container) |
+| `wordpress` | `$HOME/data/wordpress` | The WordPress installation (`/var/www/html` inside the container), shared with the `nginx` container |
+
+Because these are real directories on the VM's filesystem, the data
+survives `docker compose down`, container crashes/restarts, and even
+`docker system prune`. Only `make clean` / `make fclean` (which use
+`down -v`) or manually deleting `$HOME/data/` will remove this data.
+
+## 5. Notes on secrets handling
+
+Passwords are never passed as plain environment variables nor hard-coded in
+any Dockerfile. Instead:
+
+- `docker-compose.yml` declares each secret file under a top-level
+  `secrets:` key and lists which service can access which secret.
+- Docker mounts each declared secret read-only at
+  `/run/secrets/<secret_name>` inside the relevant container.
+- Each `setup.sh` script reads the password directly from that path
+  (e.g. `MYSQL_PASSWORD=$(cat /run/secrets/db_password)`), keeping it out
+  of `docker inspect`, `docker exec env`, and process listings.
 
