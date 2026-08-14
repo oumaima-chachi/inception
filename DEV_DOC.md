@@ -108,3 +108,8 @@ any Dockerfile. Instead:
   (e.g. `MYSQL_PASSWORD=$(cat /run/secrets/db_password)`), keeping it out
   of `docker inspect`, `docker exec env`, and process listings.
 
+## 6. Known behaviors worth knowing during defense
+
+- The WordPress `setup.sh` script only runs `wp core install` if
+  `wp-config.php` doesn't already exist, so restarting the `wordpress`
+  container does not attempt (and fail) a second installation.
