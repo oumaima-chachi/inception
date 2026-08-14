@@ -55,6 +55,11 @@ services:
       - inception
 
 volumes:
+  # Volumes NOMMÉS (pas de bind mount) dont les données sont physiquement
+  # stockées dans /home/<login>/data sur l'hôte, comme exigé par le sujet.
+  # ${HOME} est automatiquement résolu par "docker compose" à partir de la
+  # variable d'environnement du shell qui lance la commande (donc
+  # /home/<login> sur ta VM). Le Makefile crée ces dossiers avant le up.
   mariadb:
     driver: local
     driver_opts:
