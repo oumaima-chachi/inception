@@ -113,3 +113,7 @@ any Dockerfile. Instead:
 - The WordPress `setup.sh` script only runs `wp core install` if
   `wp-config.php` doesn't already exist, so restarting the `wordpress`
   container does not attempt (and fail) a second installation.
+- The MariaDB `setup.sh` script starts the database twice on first boot:
+  once in the background to run the initialization SQL, then again in the
+  foreground (`exec mysqld_safe`) so the final process becomes the
+  container's PID 1.
