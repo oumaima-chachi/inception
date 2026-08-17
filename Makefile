@@ -16,6 +16,7 @@ clean:
 
 fclean: clean
 	docker system prune -af
+	sudo rm -rf $(HOME)/data/mariadb $(HOME)/data/wordpress
 
 re: fclean all
 
