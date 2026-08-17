@@ -4,6 +4,7 @@ set -e
 MYSQL_PASSWORD=$(cat /run/secrets/db_password)
 MYSQL_ROOT_PASSWORD=$(cat /run/secrets/db_root_password)
 
+# Initialisation uniquement si la base n'existe pas
 if [ ! -d "/var/lib/mysql/${MYSQL_DATABASE}" ]; then
     echo "Initializing MariaDB..."
 
@@ -12,6 +13,7 @@ if [ ! -d "/var/lib/mysql/${MYSQL_DATABASE}" ]; then
     mysqld_safe &
     pid="$!"
 
+    # Attendre que MariaDB soit prête
     until mysqladmin ping --silent; do
         sleep 1
     done
