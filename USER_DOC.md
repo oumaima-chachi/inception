@@ -91,3 +91,7 @@ docker compose -f srcs/docker-compose.yml logs -f wordpress
 docker compose -f srcs/docker-compose.yml logs -f mariadb
 ```
 
+A healthy stack shows all three containers as `Up` and the website loads
+at `https://<your-domain>` without a "502 Bad Gateway" or connection
+refused error. A 502 usually means WordPress/PHP-FPM isn't ready yet — wait
+a few seconds and refresh.
