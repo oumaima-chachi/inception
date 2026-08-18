@@ -117,3 +117,8 @@ any Dockerfile. Instead:
   once in the background to run the initialization SQL, then again in the
   foreground (`exec mysqld_safe`) so the final process becomes the
   container's PID 1.
+- The NGINX configuration is not static: it's generated at container
+  startup from `nginx.conf.template` via `envsubst`, using the current
+  `DOMAIN_NAME`. The TLS certificate is also generated at startup with a
+  matching Common Name, so the domain used in `.env`, in the certificate,
+  and in the NGINX `server_name` directive can never drift apart.
